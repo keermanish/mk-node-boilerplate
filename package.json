@@ -5,12 +5,17 @@
   "main": "index.js",
   "scripts": {
     "start": "gulp",
-    "stage": "gulp",
-    "prod": "gulp"
+    "stage": "gulp stage",
+    "prod": "gulp prod",
+    "lint": "eslint ./src",
+    "lint:fix": "eslint --fix ./src"
   },
   "keywords": [
     "node",
     "boilerplate"
+  ],
+  "pre-commit": [
+    "lint"
   ],
   "author": "keermanish@gmail.com",
   "license": "ISC",
@@ -32,6 +37,7 @@
     "gulp-babel": "^7.0.1",
     "gulp-nodemon": "^2.2.1",
     "gulp-watch": "^5.0.0",
+    "pre-commit": "^1.2.2",
     "rimraf": "^2.6.2",
     "run-sequence": "^2.2.1"
   }

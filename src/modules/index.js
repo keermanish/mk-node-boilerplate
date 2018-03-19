@@ -14,4 +14,12 @@ const routes = new express.Router();
  */
 routes.use('/todo', todoRoutes);
 
+/**
+ * welcome route
+ * GET /
+ */
+routes.get('/', (req, res) => {
+  res.status(200).send('Your node server is up and running');
+});
+
 export default routes;

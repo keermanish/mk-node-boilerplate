@@ -4,6 +4,7 @@ import rimraf from 'rimraf';
 import run from 'run-sequence';
 import babel from 'gulp-babel';
 import nodemon from 'gulp-nodemon';
+import { exec } from 'child_process';
 
 /* required path config */
 const path = {
@@ -22,12 +23,12 @@ gulp.task('default', ['set-dev-node-env'], cb => {
 
 /* production mode - gulp prod */
 gulp.task('prod', ['set-prod-node-env'], cb => {
-  run('build', 'watch', cb);
+  run('build', cb);
 });
 
 /* stage mode - gulp prod */
 gulp.task('stage', ['set-stage-node-env'], cb => {
-  run('build', 'watch', cb);
+  run('build', cb);
 });
 
 /* set development env */
@@ -49,10 +50,10 @@ gulp.task('set-stage-node-env', () => {
 * task to bootstrap the application
 * clean - clear old scripts
 * babel - transpile ES6 -> ES5
-* start-server - start node server
+* start-server-with-watch - start node server
 */
 gulp.task('build', cb => {
-  run('clean', 'babel', 'start-server', cb);
+  run('clean', 'babel', 'start-server-with-watch', cb);
 });
 
 /**
@@ -91,7 +92,7 @@ gulp.task('babel', () => {
 });
 
 /* task to start server - here we are using nodemon to watch for changes */
-gulp.task('start-server', () => {
+gulp.task('start-server-with-watch', () => {
   nodemon({
     'script': path.entry
   })
@@ -103,5 +104,13 @@ gulp.task('start-server', () => {
   })
   .on('exit', () => {
     console.log('server has been stped');
+  });
+});
+
+/* task to start server - here we are not watching for changes */
+gulp.task('start-server', (cb) => {
+  exec(`node ${path.entry}`, (err, stdout, stderr) => {
+    console.log(stdout, stderr);
+    cb(err);
   });
 });

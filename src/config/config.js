@@ -7,7 +7,7 @@ const config = {
   // CORS support
   // provide comma seperated URL's which we wanted to allow
   // else application will be available to all
-  'ALLOWED_ORIGINS': process.env.ALLOWED_ORIGINS.split(',') || '*',
+  'ALLOWED_ORIGINS': process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : '*',
 };
 
 export default config;

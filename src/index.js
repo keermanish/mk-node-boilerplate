@@ -6,9 +6,9 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 
 import routes from './modules';
+import { PORT } from './config/const';
 
 const app = express();
-const port = process.env.PORT || 8080;
 
 // middleware will attempt to compress response bodies
 app.use(compression());
@@ -28,6 +28,7 @@ app.use(bodyParser.json());
 // all application routes
 app.use(routes);
 
-app.listen(port, () => {
-  console.log(`App listen on ${port}`);
+// run your http server on provided port
+app.listen(PORT, () => {
+  console.log(`App listen on ${PORT}`);
 });

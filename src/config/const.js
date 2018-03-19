@@ -17,3 +17,6 @@ export const regex = {
   // regx to check number
   'number': /^\d+$/g
 };
+
+// port where application will be up and running
+export const PORT = process.env.PORT || 3000;

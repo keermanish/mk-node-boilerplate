@@ -1,6 +1,8 @@
 // all CORS config goes here
 import config from './config';
 
+// CORS config
+// give support for all incoming request mentioned in ALLOWED_ORIGINS
 export const corsOptions = {
 	'origin': (origin, callback) => {
 		if(!Array.isArray(config.ALLOWED_ORIGINS)) {
